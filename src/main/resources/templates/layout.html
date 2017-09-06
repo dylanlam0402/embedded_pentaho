@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2017. KMS Technology, Inc.
+  -->
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Rabbit Holes</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}" href="../static/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" href="../static/css/font-awesome.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/app.css}" href="../static/css/app.css"/>
+</head>
+<body>
+<div class="page">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only" th:text="#{navbar.toggle-nav}">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" th:text="#{navbar.brand}">Rabbit Holes</span>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li th:if="${currentUser.loggedIn}"><a th:href="@{/}" th:text="#{navbar.home-link}">Home</a></li>
+            </ul>
+            <ul th:if="${!currentUser.loggedIn}" class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/signin}" th:text="#{navbar.signin-link}">Sign In</a></li>
+                <li><a th:href="@{/register}" th:text="#{navbar.register-link}">Register</a></li>
+            </ul>
+            <ul th:if="${currentUser.loggedIn}" class="nav navbar-nav navbar-right">
+                <li>
+                    <span>[[#{navbar.signedin-text}]] <strong>[[${currentUser.firstName}]] [[${currentUser.lastName}]]</strong></span>
+                </li>
+                <li><a th:href="@{/files/upload}" th:text="#{navbar.upload-link}">Upload</a></li>
+                <li>
+                    <form th:action="@{/signout}" method="post">
+                        <button type="submit">Sign Out</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <div id="content">
+        <h2 layout:fragment="header">Layout</h2>
+        <div layout:fragment="content">Fake content</div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/vendor/jquery-3.2.0.min.js}"
+        src="../static/js/vendor/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" th:src="@{/js/vendor/bootstrap.min.js}"
+        src="../static/js/vendor/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/app.js}" src="../static/js/app.js"></script>
+</body>
+</html>

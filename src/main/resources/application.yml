@@ -1,0 +1,31 @@
+rabbitholes:
+    upload-location: ./upload
+
+spring:
+    thymeleaf:
+        mode: HTML5
+        cache: false
+
+    datasource:
+        url: jdbc:h2:~/rabbitholes_db
+        username: lamanhkiet
+        password: 123456
+        driver-class-name: org.h2.Driver
+
+    jpa:
+        hibernate.ddl-auto: validate
+        show-sql: true
+
+    messages:
+        basename: i18n/messages
+        cache-seconds: 0
+
+    h2:
+        console.enabled: true
+        console.path: /console
+
+logging:
+  file: logs/rabbitholes.log
+  level:
+    root: WARN
+    vn.kms.rabbitholes: DEBUG

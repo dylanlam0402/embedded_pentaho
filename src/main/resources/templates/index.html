@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2017. KMS Technology, Inc.
+  -->
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+
+<head>
+    <title>Rabbit Holes</title>
+    <script type="text/javascript" src="/js/vendor/jquery-3.2.0.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+</head>
+
+<body>
+<h1 layout:fragment="header" th:text="#{home.title}">Your Files</h1>
+<div layout:fragment="content" class="container">
+    <form action="/" method="GET" class="form-inline">
+
+        <div class="form-group">
+            <input type="text" id="keyword" name="keyword" th:value="${param.keyword}" class="form-control"
+                   th:placeholder="#{home.search-placeholder}">
+            <input type="submit" th:value="#{home.search-button}" class="btn btn-default">
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Uploader</th>
+            <th>File Name</th>
+            <th>Content Type</th>
+            <th>Comment</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="file : ${files}">
+            <td>[[${file.uploader.firstName}]] [[${file.uploader.lastName}]]</td>
+            <td><a th:href="@{'files/' + ${file.uploader.id} + '/' + ${file.fileName}}">[[${file.fileName}]]</a></td>
+            <td>[[${file.fileType}]]</td>
+            <td th:utext="${file.uploadComment}"></td>
+            <td>
+                <input type="text" id="txtCSRF" name="CSRF" th:value="${CSRF}" hidden="hidden">
+                <button class="butDelete" th:data="${file.id}"> delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
